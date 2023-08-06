@@ -1,4 +1,4 @@
-package custom_errors
+package custom_error
 
 type CustomError struct {
 	code    int

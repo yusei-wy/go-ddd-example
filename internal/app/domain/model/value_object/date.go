@@ -3,7 +3,6 @@ package value_object
 import (
 	"ddd_go_example/internal/app/domain/custom_error"
 	"fmt"
-	"net/http"
 	"time"
 )
 
@@ -15,7 +14,7 @@ type Date struct {
 
 func NewDate(year, month, day int) (Date, error) {
 	if _, err := toTime(year, month, day); err != nil {
-		return Date{}, custom_error.NewBusinessRuleError(http.StatusBadRequest, "invalid date")
+		return Date{}, custom_error.NewBusinessRuleError(custom_error.StatusBadRequest, "invalid date")
 	}
 	return Date{year: year, month: month, day: day}, nil
 }

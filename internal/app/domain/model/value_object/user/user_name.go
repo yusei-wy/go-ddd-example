@@ -2,7 +2,6 @@ package user
 
 import (
 	"ddd_go_example/internal/app/domain/custom_error"
-	"net/http"
 )
 
 type UserName struct {
@@ -11,7 +10,7 @@ type UserName struct {
 
 func NewUserName(value string) (UserName, error) {
 	if value == "" {
-		return UserName{}, custom_error.NewBusinessRuleError(http.StatusBadRequest, "user name is empty")
+		return UserName{}, custom_error.NewBusinessRuleError(custom_error.StatusBadRequest, "user name is empty")
 	}
 	return UserName{value: value}, nil
 }

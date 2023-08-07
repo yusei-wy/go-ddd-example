@@ -24,5 +24,6 @@
         ├── interface             // HTTP リクエストを受け取り UseCase で処理を行ってレスポンスを返す
         │   ├── respose
         │   └── router
-        └── usecase```
+        └── use_case
+```
 

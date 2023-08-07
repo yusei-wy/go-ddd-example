@@ -1,4 +1,4 @@
-package value_user
+package user
 
 import (
 	"ddd_go_example/internal/app/domain/custom_error"

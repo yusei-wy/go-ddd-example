@@ -6,10 +6,10 @@ import (
 )
 
 type PostService struct {
-	userRepository repository.PostRepository
+	userRepository *repository.PostRepository
 }
 
-func NewPostService(userRepository repository.PostRepository) *PostService {
+func NewPostService(userRepository *repository.PostRepository) *PostService {
 	return &PostService{userRepository: userRepository}
 }
 

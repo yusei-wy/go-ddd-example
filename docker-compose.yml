@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build:
+      context: go
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=local
+    command: "/scripts/start.sh"
+    volumes:
+      - ./:/go-ddd-example
+
+  db:
+    image: postgres:15.4-bookworm
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: go_ddd_example
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+
+volumes:
+  postgres_data:

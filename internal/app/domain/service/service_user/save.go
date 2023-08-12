@@ -1,7 +1,7 @@
 package service_user
 
 import (
-	value_user "ddd_go_example/internal/app/domain/model/value_object/value_user"
+	"ddd_go_example/internal/app/domain/model/value_object/value_user"
 )
 
 type SaveUserInput struct {
@@ -15,7 +15,6 @@ type SaveUserOutput struct {
 }
 
 func (s *UserService) Save(input SaveUserInput) (SaveUserOutput, error) {
-	// TODO: create command
 	// cmd := cmd_user.SaveUserCommand{
 	// 	UserId:   input.UserId,
 	// 	UserName: input.UserName,
@@ -23,7 +22,10 @@ func (s *UserService) Save(input SaveUserInput) (SaveUserOutput, error) {
 	// }
 
 	// TODO: save user
+	// userId, err := s.UserRepository.Save(cmd)
+	// if err != nil {
+	// 	return SaveUserOutput{}, err
+	// }
 
-	// TODO: return user id
 	return SaveUserOutput{UserId: ""}, nil
 }

@@ -7,13 +7,13 @@ import (
 
 type UserService struct {
 	conn           repository.DBConnection
-	userRepository *repository.UserRepository
+	UserRepository *repository.UserRepository
 }
 
 func NewUserService(conn repository.DBConnection, userRepository *repository.UserRepository) *UserService {
 	return &UserService{
 		conn:           conn,
-		userRepository: userRepository,
+		UserRepository: userRepository,
 	}
 }
 

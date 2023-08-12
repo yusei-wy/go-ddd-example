@@ -1,4 +1,4 @@
-package service
+package post
 
 import (
 	"ddd_go_example/internal/app/domain/model/query_model"
@@ -6,16 +6,15 @@ import (
 )
 
 type PostService struct {
+	conn           repository.DBConnection
 	userRepository *repository.PostRepository
 }
 
-func NewPostService(userRepository *repository.PostRepository) *PostService {
-	return &PostService{userRepository: userRepository}
-}
-
-func (s *PostService) Save(conn repository.DBConnection) (string, error) {
-	// TODO: implement
-	return "", nil
+func NewPostService(conn repository.DBConnection, userRepository *repository.PostRepository) *PostService {
+	return &PostService{
+		conn:           conn,
+		userRepository: userRepository,
+	}
 }
 
 func (s *PostService) Update(conn repository.DBConnection) error {

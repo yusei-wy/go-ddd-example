@@ -1,4 +1,4 @@
-package command_model
+package post
 
 import (
 	"time"
@@ -7,7 +7,7 @@ import (
 	"ddd_go_example/internal/app/domain/model/value_object/user"
 )
 
-type Post struct {
+type SavePostCommand struct {
 	PostId    post.PostId
 	CreatedBy user.UserId
 	Content   string

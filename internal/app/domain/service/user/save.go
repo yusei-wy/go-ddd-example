@@ -10,6 +10,10 @@ type SaveUserOutput struct {
 }
 
 func (s *UserService) Save(input SaveUserInput) (SaveUserOutput, error) {
-	// TODO: implement
+	// TODO: create command
+
+	// TODO: save user
+
+	// TODO: return user id
 	return SaveUserOutput{UserId: ""}, nil
 }

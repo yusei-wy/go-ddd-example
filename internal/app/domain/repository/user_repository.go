@@ -2,9 +2,9 @@ package repository
 
 import (
 	"ddd_go_example/internal/app/domain/custom_error"
-	cmd_user "ddd_go_example/internal/app/domain/model/command_model/user"
+	"ddd_go_example/internal/app/domain/model/command_model/cmd_user"
 	"ddd_go_example/internal/app/domain/model/query_model"
-	value_user "ddd_go_example/internal/app/domain/model/value_object/user"
+	"ddd_go_example/internal/app/domain/model/value_object/value_user"
 )
 
 type UserRepository interface {

@@ -1,4 +1,4 @@
-package post
+package value_post
 
 import "ddd_go_example/internal/app/domain/model/value_object"
 

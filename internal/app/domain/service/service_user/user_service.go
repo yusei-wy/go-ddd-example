@@ -1,4 +1,4 @@
-package user
+package service_user
 
 import (
 	"ddd_go_example/internal/app/domain/model/query_model"

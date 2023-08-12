@@ -1,4 +1,4 @@
-package post
+package service_post
 
 import (
 	"ddd_go_example/internal/app/domain/model/query_model"

@@ -1,7 +1,7 @@
-package user
+package service_user
 
 import (
-	value_user "ddd_go_example/internal/app/domain/model/value_object/user"
+	value_user "ddd_go_example/internal/app/domain/model/value_object/value_user"
 )
 
 type SaveUserInput struct {

@@ -1,4 +1,4 @@
-package query_model
+package cmd_post
 
 import (
 	"time"
@@ -7,7 +7,7 @@ import (
 	"ddd_go_example/internal/app/domain/model/value_object/value_user"
 )
 
-type Post struct {
+type SavePostCommand struct {
 	PostId    value_post.PostId
 	CreatedBy value_user.UserId
 	Content   string

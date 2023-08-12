@@ -1,9 +1,10 @@
 package command_model
 
 import (
+	"time"
+
 	"ddd_go_example/internal/app/domain/model/value_object/post"
 	"ddd_go_example/internal/app/domain/model/value_object/user"
-	"time"
 )
 
 type Post struct {

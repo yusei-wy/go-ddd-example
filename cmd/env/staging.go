@@ -1,5 +1,4 @@
 package env
 
 func RunStaging() {
-
 }

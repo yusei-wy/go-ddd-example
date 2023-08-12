@@ -1,8 +1,9 @@
 package main
 
 import (
-	"ddd_go_example/cmd/env"
 	"os"
+
+	"ddd_go_example/cmd/env"
 )
 
 func main() {

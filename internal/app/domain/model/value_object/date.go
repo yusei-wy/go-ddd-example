@@ -1,9 +1,10 @@
 package value_object
 
 import (
-	"ddd_go_example/internal/app/domain/custom_error"
 	"fmt"
 	"time"
+
+	"ddd_go_example/internal/app/domain/custom_error"
 )
 
 type Date struct {

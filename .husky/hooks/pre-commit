@@ -1,4 +1,6 @@
 #!/bin/sh
 
-golangci-lint run
+set -e
+
 gofumpt -l -w .
+golangci-lint run

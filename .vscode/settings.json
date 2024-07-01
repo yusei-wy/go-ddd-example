@@ -1,0 +1,17 @@
+{
+  "cSpell.words": [
+    "customerror",
+    "golangci",
+    "gonstructor",
+    "go_ddd_example",
+    "ireturn",
+    "nolint",
+    "Psql"
+  ],
+  "go.lintFlags": [
+    // "--fast"
+  ],
+  "workbench.editor.customLabels.patterns": {
+    "**/*.go": "${dirname(1)}/${dirname}/${filename}.${extname}"
+  }
+}

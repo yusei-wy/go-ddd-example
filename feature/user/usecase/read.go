@@ -8,7 +8,7 @@ import (
 )
 
 type GetUserInput struct {
-	Id uuid.UUID `json:"id"`
+	ID uuid.UUID `json:"id"`
 }
 
 type GetUserOutput struct {
@@ -16,10 +16,10 @@ type GetUserOutput struct {
 }
 
 func (u *UserUseCaseImpl) GetUser(input GetUserInput) (GetUserOutput, customerror.UseCaseError) {
-	user, err := u.service.GetUser(input.Id)
+	user, err := u.service.GetUser(input.ID)
 	if err != nil {
 		return GetUserOutput{User: nil}, customerror.NewUseCaseError(
-			customerror.UseCaseErrorContextNotFound, customerror.NotFoundError("User", input.Id, err))
+			customerror.UseCaseErrorContextNotFound, customerror.NotFoundError("User", input.ID, err))
 	}
 
 	return GetUserOutput{User: user}, nil

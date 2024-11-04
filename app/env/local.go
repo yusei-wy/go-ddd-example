@@ -9,7 +9,7 @@ import (
 
 func NewLocal() Environment {
 	return Environment{
-		DatabaseUrl: os.Getenv("DATABASE_URL"),
+		DatabaseURL: os.Getenv("DATABASE_URL"),
 		LogLevel:    log.DEBUG,
 	}
 }

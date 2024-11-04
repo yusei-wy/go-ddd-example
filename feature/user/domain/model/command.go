@@ -6,12 +6,11 @@ import (
 	customerror "go_ddd_example/share/custom_error"
 )
 
-//go:generate getters
 type UserCommand struct {
-	id       UserId
-	name     UserName
-	createAt time.Time
-	updateAt time.Time
+	ID       UserID
+	Name     UserName
+	CreateAt time.Time
+	UpdateAt time.Time
 }
 
 func CreateUserCommand(name string) (UserCommand, customerror.ModelError) {
@@ -21,9 +20,9 @@ func CreateUserCommand(name string) (UserCommand, customerror.ModelError) {
 	}
 
 	return UserCommand{
-		id:       NewUserId(),
-		name:     userName,
-		createAt: time.Now(),
-		updateAt: time.Now(),
+		ID:       NewUserID(),
+		Name:     userName,
+		CreateAt: time.Now(),
+		UpdateAt: time.Now(),
 	}, nil
 }

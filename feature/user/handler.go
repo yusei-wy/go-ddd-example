@@ -15,8 +15,8 @@ type UserHandler struct {
 	usecase usecase.UserUseCase
 }
 
-func NewUserHandler(userUsecase usecase.UserUseCase) UserHandler {
-	return UserHandler{usecase: userUsecase}
+func NewUserHandler(u usecase.UserUseCase) UserHandler {
+	return UserHandler{usecase: u}
 }
 
 func (h *UserHandler) CreateUser(ctx echo.Context) error {
@@ -33,12 +33,12 @@ func (h *UserHandler) CreateUser(ctx echo.Context) error {
 }
 
 func (h *UserHandler) GetUser(ctx echo.Context) error {
-	userId, err := uuid.Parse(ctx.Param("userId"))
+	userID, err := uuid.Parse(ctx.Param("userId"))
 	if err != nil {
 		return customerror.NewHandlerErrorWithMessage(customerror.HandlerErrorContextParseError, err, "Invalid input")
 	}
 	input := usecase.GetUserInput{
-		Id: userId,
+		ID: userID,
 	}
 
 	user, err := h.usecase.GetUser(input)

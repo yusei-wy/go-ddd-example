@@ -9,5 +9,5 @@ import (
 
 type UserRepository interface {
 	CreateUser(cmd model.UserCommand) customerror.RepositoryError
-	GetUser(userId uuid.UUID) (*model.User, customerror.RepositoryError)
+	GetUser(userID uuid.UUID) (*model.User, customerror.RepositoryError)
 }

@@ -16,7 +16,7 @@ type UserServiceImpl struct {
 	repository UserRepository
 }
 
-func NewUserServiceImpl(repository UserRepository) UserService {
+func NewUserServiceImpl(repository UserRepository) *UserServiceImpl {
 	return &UserServiceImpl{
 		repository: repository,
 	}

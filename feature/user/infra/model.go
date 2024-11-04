@@ -1,4 +1,4 @@
-package infrastructure
+package infra
 
 import (
 	"time"
@@ -9,7 +9,7 @@ import (
 )
 
 type UserQuery struct {
-	Id       uuid.UUID `db:"id"`
+	ID       uuid.UUID `db:"id"`
 	Name     string    `db:"name"`
 	CreateAt time.Time `db:"created_at"`
 	UpdateAt time.Time `db:"updated_at"`
@@ -17,15 +17,15 @@ type UserQuery struct {
 
 func NewUserQuery(cmd model.UserCommand) UserQuery {
 	return UserQuery{
-		Id:       cmd.Id().Value(),
-		Name:     cmd.Name().String(),
-		CreateAt: cmd.CreateAt(),
-		UpdateAt: cmd.UpdateAt(),
+		ID:       cmd.ID.Value(),
+		Name:     cmd.Name.String(),
+		CreateAt: cmd.CreateAt,
+		UpdateAt: cmd.UpdateAt,
 	}
 }
 
 type QueryableUser struct {
-	Id        uuid.UUID `db:"id"`
+	ID        uuid.UUID `db:"id"`
 	Name      string    `db:"name"`
 	CreatedAt time.Time `db:"created_at"`
 	UpdatedAt time.Time `db:"updated_at"`

@@ -3,6 +3,6 @@ package env
 import "github.com/labstack/gommon/log"
 
 type Environment struct {
-	DatabaseUrl string
+	DatabaseURL string
 	LogLevel    log.Lvl
 }

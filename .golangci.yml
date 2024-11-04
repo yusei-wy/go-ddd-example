@@ -5,13 +5,13 @@ run:
 
 linters:
   enable-all: true
+
   disable:
     - depguard
     - gci # 有効化したいけど vscode の保存時に勝手にフォーマットされ警告が出続けるので無効化
     - gofumpt
     - ireturn
     - revive
-    - stylecheck
     - testpackage
     - varnamelen
     - wsl

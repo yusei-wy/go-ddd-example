@@ -10,11 +10,13 @@ type UserUseCase interface {
 	GetUser(input GetUserInput) (GetUserOutput, customerror.UseCaseError)
 }
 
+var _ UserUseCase = (*UserUseCaseImpl)(nil)
+
 type UserUseCaseImpl struct {
-	repository domain.UserRepository
 	service    domain.UserService
+	repository domain.UserRepository
 }
 
-func NewUserUseCaseImpl(repository domain.UserRepository, service domain.UserService) UserUseCase {
-	return &UserUseCaseImpl{repository: repository, service: service}
+func NewUserUseCaseImpl(service domain.UserService, repository domain.UserRepository) *UserUseCaseImpl {
+	return &UserUseCaseImpl{service: service, repository: repository}
 }

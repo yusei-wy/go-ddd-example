@@ -1,4 +1,4 @@
-package infrastructure
+package infra
 
 import (
 	"go_ddd_example/feature/user/domain"
@@ -9,11 +9,13 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+var _ domain.UserRepository = (*PsqlUserRepository)(nil)
+
 type PsqlUserRepository struct {
 	db *sqlx.DB
 }
 
-func NewPsQlUserRepository(db *sqlx.DB) domain.UserRepository {
+func NewPsQlUserRepository(db *sqlx.DB) *PsqlUserRepository {
 	return &PsqlUserRepository{db}
 }
 
@@ -46,7 +48,34 @@ func (r *PsqlUserRepository) CreateUser(cmd model.UserCommand) customerror.Repos
 	return nil
 }
 
-func (r *PsqlUserRepository) GetUser(userId uuid.UUID) (*model.User, customerror.RepositoryError) {
+func (r *PsqlUserRepository) GetUsers(userIds []uuid.UUID) ([]model.User, customerror.RepositoryError) {
+	query := `
+		SELECT
+			id
+			, name
+			, created_at
+			, updated_at
+		FROM
+			users
+		WHERE
+			id IN (:ids)
+	`
+
+	var queryables []QueryableUser
+	if err := r.db.Select(&queryables, query, userIds); err != nil {
+		return nil, customerror.NewRepositoryError(err)
+	}
+
+	users := make([]model.User, 0, len(queryables))
+	for _, queryable := range queryables {
+		user := model.NewUser(queryable.ID, queryable.Name)
+		users = append(users, user)
+	}
+
+	return users, nil
+}
+
+func (r *PsqlUserRepository) GetUser(userID uuid.UUID) (*model.User, customerror.RepositoryError) {
 	query := `
 		SELECT
 			id
@@ -60,11 +89,11 @@ func (r *PsqlUserRepository) GetUser(userId uuid.UUID) (*model.User, customerror
 	`
 
 	var queryable QueryableUser
-	if err := r.db.Get(&queryable, query, userId); err != nil {
+	if err := r.db.Get(&queryable, query, userID); err != nil {
 		return nil, customerror.NewRepositoryError(err)
 	}
 
-	user := model.NewUser(queryable.Id, queryable.Name)
+	user := model.NewUser(queryable.ID, queryable.Name)
 
 	return &user, nil
 }

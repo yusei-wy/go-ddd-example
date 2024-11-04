@@ -3,7 +3,6 @@
 ## Requirements
 
 - Docker
-- [go-getters](https://github.com/yusei-wy/go-getters)
 - [golang-migrate](https://github.com/golang-migrate/migrate)
 
 ## Directories
@@ -61,3 +60,4 @@ This project is a sample web application created using Go, employing the DDD, CQ
 - [ ] Create new directive
 - [x] Migration system
 - [ ] Generate Request And Response Type With OpenAPI
+- [x] Dependency Injection

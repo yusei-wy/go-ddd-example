@@ -4,13 +4,16 @@ import (
 	"net/http"
 
 	"go_ddd_example/feature/user"
-	"go_ddd_example/share/usecase"
+	"go_ddd_example/feature/user/usecase"
 
 	"github.com/labstack/echo/v4"
+	"github.com/samber/do/v2"
 )
 
-func RegisterHandlers(e *echo.Echo, useCase usecase.UseCaseFacade) {
-	userHandler := user.NewUserHandler(useCase.UserUseCase)
+func RegisterHandlers(e *echo.Echo) {
+	injector := do.New(user.Package())
+
+	userHandler := user.NewUserHandler(do.MustInvoke[*usecase.UserUseCaseImpl](injector))
 
 	// NOTE: handler は error を返さないと HandlerFunc と型が一致しない
 	e.GET("/health", func(ctx echo.Context) error {

@@ -6,12 +6,12 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-type UserId string
+type UserID string
 
 func Test_NotFoundError(t *testing.T) {
-	userId := UserId("user_0")
+	userID := UserID("user_0")
 
-	err := NotFoundError("User", userId, nil)
+	err := NotFoundError("User", userID, nil)
 
 	if diff := cmp.Diff("User not found UserId(\"user_0\")", err.Error()); diff != "" {
 		t.Errorf("Error: (-got +want)\n%s", diff)

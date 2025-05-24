@@ -1,4 +1,9 @@
 {
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "file": "./docs/architecture.md",
+    },
+  ],
   "go.lintFlags": [
     // "--fast"
   ],

@@ -51,13 +51,11 @@ This project is a sample web application created using Go, employing the DDD, CQ
 | `make test` | run go test ./... |
 ```
 
-
 ## TODO
 
 - [x] DDD architecture
 - [x] Custom error handler
-- [x] Create getters directive
 - [ ] Create new directive
 - [x] Migration system
 - [ ] Generate Request And Response Type With OpenAPI
-- [x] Dependency Injection
+- [ ] Dependency Injection

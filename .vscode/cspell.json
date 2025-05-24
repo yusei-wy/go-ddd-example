@@ -1,0 +1,18 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+      "Psql",
+      "customerror",
+      "go_ddd_example",
+      "golangci",
+      "gonstructor",
+      "ireturn",
+      "nolint",
+      "usecase",
+    ],
+    "ignoreWords": [],
+    "import": []
+}

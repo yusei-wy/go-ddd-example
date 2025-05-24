@@ -1,13 +1,4 @@
 {
-  "cSpell.words": [
-    "customerror",
-    "golangci",
-    "gonstructor",
-    "go_ddd_example",
-    "ireturn",
-    "nolint",
-    "Psql"
-  ],
   "go.lintFlags": [
     // "--fast"
   ],

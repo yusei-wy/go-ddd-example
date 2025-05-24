@@ -31,7 +31,7 @@ func NewApp(stage env.Stage) {
 	// 	NewProduction()
 	// }
 
-	db, err := sqlx.Open("postgres", environment.DatabaseUrl)
+	db, err := sqlx.Open("postgres", environment.DatabaseURL)
 	if err != nil {
 		panic(err)
 	}

@@ -1,8 +1,26 @@
 {
   "github.copilot.chat.codeGeneration.instructions": [
     {
-      "file": "./docs/architecture.md",
+      "file": "./docs/ai-development/copilot-instructions.md"
     },
+    {
+      "file": "./docs/architecture.md"
+    },
+    {
+      "file": "./docs/rules/coding-standards.md"
+    },
+    {
+      "file": "./docs/rules/api-design-rules.md"
+    },
+    {
+      "file": "./docs/rules/error-handling.md"
+    },
+    {
+      "file": "./docs/rules/testing-guidelines.md"
+    },
+    {
+      "file": "./docs/rules/security-guidelines.md"
+    }
   ],
   "go.lintFlags": [
     // "--fast"

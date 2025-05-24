@@ -119,161 +119,22 @@ func (u *UserUsecase) CreateUser(ctx context.Context, input CreateUserInput) err
 
 ## 命名規則
 
-一貫性のある命名規則により、コードの可読性と保守性を向上させます。Go言語の公式ガイドライン「Effective Go」に従った命名を採用しています。
+プロジェクトでは、Go言語の公式ガイドライン「Effective Go」に従った命名規則を採用しています。
 
-### ファイル・ディレクトリ命名
-
-- **ファイル名**: `snake_case.go` (例: `user_service.go`, `value_object.go`)
-- **ディレクトリ名**: `snake_case` (例: `value_object/`, `custom_error/`)
-- **テストファイル**: `*_test.go` (例: `user_service_test.go`)
-- **パッケージ名**: 全て小文字、アンダースコアなし (例: `userservice`, `valueobject`, `customerror`)
-
-### Go言語命名規則（公式ガイドライン準拠）
-
-Go言語では **MixedCaps または mixedCaps** の使用が推奨されており、アンダースコアは避けます。
-
-- **パブリック関数・型**: `PascalCase` (例: `CreateUser`, `UserRepository`)
-- **プライベート関数・変数**: `camelCase` (例: `validateEmail`, `userRepo`)
-- **複数単語の変数・関数**: `camelCase` または `PascalCase` (例: `userName`, `UserName`)
-- **定数**: `PascalCase` (例: `MaxUserNameLength`, `DefaultTimeout`)
-- **インターフェース**: 動作を表す名詞 + `er` (例: `UserRepository`, `EmailSender`)
-
-### ドメイン固有命名
-
-- **エンティティ**: ドメインオブジェクト名 (例: `User`, `Order`)
-- **値オブジェクト**: 値の種類を表す名詞 (例: `Email`, `UserId`)
-- **コマンド**: `<動詞><対象>Command` (例: `CreateUserCommand`)
-- **クエリ**: `<対象><動詞>Query` (例: `UserFindQuery`)
-- **エラー**: `Err<エラー内容>` (例: `ErrUserNotFound`)
-
-### パッケージ名の重要な補足
-
-Go言語のパッケージ名は以下のガイドラインに従います：
-
-**公式Go言語推奨事項**：
-- 全て小文字
-- アンダースコアや大文字を使用しない
-- 短く、簡潔な名前
-- 複数の単語は連結（例：`customerror`, `valueobject`）
-
-**実例**：
-- ✅ 推奨: `package customerror`, `package valueobject`
-- ❌ 非推奨: `package custom_error`, `package valueObject`
-
-### 重要な注意事項
-
-**Go言語の公式ガイドライン**（Effective Go）では：
-> "the convention in Go is to use MixedCaps or mixedCaps rather than underscores to write multiword names."
-
-このため、Go言語コード内の変数名・関数名・型名では：
-- ✅ 推奨: `userName`, `UserName`, `validateEmail`
-- ❌ 非推奨: `user_name`, `validate_email`
-
-ただし、**ファイル名**については慣習的にアンダースコアが使用されることがあります（例: `user_service.go`）。
+詳細な命名規則については、**[コーディング規約](./rules/coding-standards.md#命名規則)** を参照してください。
 
 ## テスト戦略（TDD重視）
 
 Test-Driven Development（TDD）を採用し、品質の高いコードを実現します。
 
-### 1. TDDサイクル
+詳細なテスト実装ガイドについては、**[テストガイドライン](./rules/testing-guidelines.md)** を参照してください。
 
-```
-Red → Green → Refactor
-1. 失敗するテストを書く
-2. テストが通る最小限のコードを書く
-3. コードをリファクタリングする
-```
+### テスト分類
 
-### 2. テスト分類
-
-#### ユニットテスト
-
-各レイヤーの単体機能をテストします。
-
-```go
-// ドメインモデルのテスト例
-func TestNewEmail_ValidEmail_ReturnsEmail(t *testing.T) {
-    // Given
-    validEmail := "test@example.com"
-    
-    // When
-    email, err := NewEmail(validEmail)
-    
-    // Then
-    assert.NoError(t, err)
-    assert.Equal(t, validEmail, email.String())
-}
-```
-
-#### 統合テスト
-
-複数のコンポーネント間の連携をテストします。
-
-```go
-// リポジトリ統合テスト例
-func TestUserRepository_Create_Success(t *testing.T) {
-    // Given
-    db := setupTestDB(t)
-    repo := NewUserRepository(db)
-    user := createTestUser()
-    
-    // When
-    err := repo.Create(context.Background(), user)
-    
-    // Then
-    assert.NoError(t, err)
-    // データベースから取得して検証
-}
-```
-
-#### E2Eテスト
-
-APIエンドポイントの全体的な動作をテストします。
-
-```go
-// APIテスト例
-func TestCreateUser_ValidRequest_ReturnsCreated(t *testing.T) {
-    // Given
-    server := setupTestServer(t)
-    request := CreateUserRequest{Name: "Test User", Email: "test@example.com"}
-    
-    // When
-    resp := server.POST("/users").WithJSON(request).Expect()
-    
-    // Then
-    resp.Status(http.StatusCreated)
-    resp.JSON().Object().ContainsKey("id")
-}
-```
-
-### 3. テスト用ヘルパー
-
-```go
-// テストデータ生成
-func CreateTestUser() *User {
-    return &User{
-        ID:   NewUserID(),
-        Name: "Test User",
-        Email: "test@example.com",
-    }
-}
-
-// モックオブジェクト
-type MockUserRepository struct {
-    mock.Mock
-}
-
-func (m *MockUserRepository) Create(ctx context.Context, user *User) error {
-    args := m.Called(ctx, user)
-    return args.Error(0)
-}
-```
-
-### 4. テストカバレッジ
-
+- **ユニットテスト**: 各レイヤーの単体機能をテスト
+- **統合テスト**: 複数のコンポーネント間の連携をテスト  
+- **E2Eテスト**: APIエンドポイントの全体的な動作をテスト
 - **目標カバレッジ**: 80%以上
-- **計測コマンド**: `go test -cover ./...`
-- **詳細レポート**: `go test -coverprofile=coverage.out && go tool cover -html=coverage.out`
 
 ## 実装例
 
@@ -366,42 +227,7 @@ func (h *UserHandler) CreateUser(c echo.Context) error {
 
 Webアプリケーションの一般的な脅威に対する防御策を実装します。
 
-### 1. 入力検証・サニタイゼーション
-
-```go
-// SQLインジェクション対策：prepared statement使用
-func (r *UserRepository) FindByEmail(ctx context.Context, email Email) (*User, error) {
-    query := "SELECT id, name, email FROM users WHERE email = $1"
-    row := r.db.QueryRowContext(ctx, query, email.String())
-    // ...
-}
-
-// XSS対策：HTMLエスケープ
-func sanitizeInput(input string) string {
-    return html.EscapeString(input)
-}
-```
-
-### 2. 認証・認可
-
-```go
-// JWT認証ミドルウェア
-func JWTAuthMiddleware() echo.MiddlewareFunc {
-    return middleware.JWTWithConfig(middleware.JWTConfig{
-        SigningKey: []byte(os.Getenv("JWT_SECRET")),
-        Claims:     &UserClaims{},
-    })
-}
-```
-
-### 3. レート制限
-
-```go
-// API レート制限
-func RateLimitMiddleware() echo.MiddlewareFunc {
-    return middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(10))
-}
-```
+詳細なセキュリティ実装については、**[セキュリティガイドライン](./rules/security-guidelines.md)** を参照してください。
 
 ## ログ戦略
 
@@ -516,11 +342,7 @@ logger:
 
 レイヤー別の専用エラー型を定義し、適切なエラー処理を実現しています。
 
-- **ハンドラーエラー**: `share/custom_error/handler_error.go`
-- **ユースケースエラー**: `share/custom_error/usecase_error.go`
-- **サービスエラー**: `share/custom_error/service_error.go`
-- **リポジトリエラー**: `share/custom_error/repository_error.go`
-- **モデルエラー**: `share/custom_error/model_error.go`
+詳細なエラーハンドリングの実装方法については、**[エラーハンドリング規約](./rules/error-handling.md)** を参照してください。
 
 ## 共有コンポーネント
 
